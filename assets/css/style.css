@@ -1,0 +1,16 @@
+.jumbotron {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.header {
+    padding-bottom: 0px;
+}
+
+#add-team {
+    margin-top: 16px;
+}
+
+button {
+    margin: 8px;
+}
