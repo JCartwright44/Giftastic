@@ -1,38 +1,5 @@
 var teams = ['Chicago Bulls', 'Tottenham Hotspur', 'Pittsburgh Steelers', 'Colorado Avalanche', 'Golden State Warriors', 'San Francisco Giants'];
 
-console.log('js working');
-
-function teamInfo() {
-    var team = $(this).attr('data-name');
-    var key = 'B1F06nTfUTYMBISSZxr268GfnDFn0UK7'
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + team + "&api_key=" + key + "&limit=10";
- 
-
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    }).then(function(response) {
-        console.log(response);
-
-        $('<div id="created">').appendTo('#gifsList');
-
-        $('button').on('click', function() {
-        for (var i = 0; i < queryURL.length; i++) {
-        var title = response.data[i].title;
-        $('<p id="title">').appendTo('#created');
-        $('#title').text(title);
-        console.log(title);
-        var gif = response.data[i].bitly_url;
-        $('<p id="gif">').appendTo('#created');
-        $('#gif').text(gif);
-        console.log(gif);
-        }
-    })
-    })
-    
-}
-teamInfo();
-
 function showButtons() {
     $('.teamList').empty();
     for (var i = 0; i < teams.length; i++) {
@@ -47,14 +14,64 @@ function showButtons() {
 
 
 $('#add-team').on('click', function(event) {
-    // console.log("click")
+    console.log("click")
 event.preventDefault();
-var team = $('#team-input').val().trim();
+var class1 = 'team';
+var team = $('#team-input').attr('class', class1).val();
 console.log(team)
 teams.push(team);
 showButtons();
+// console.log(teams)
 })
 
-$(document).on('click', '.team', teamInfo);
-
 showButtons();
+
+console.log('js working');
+
+$('.team').on('click', function(){
+    event.preventDefault();
+    console.log('click');
+    var currTeam = $(this).attr('data-name').trim();
+    currTeam = currTeam.replace(/\s/g, '+');
+    console.log(currTeam);
+
+    $('#gifsHere').html('');
+
+    var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + currTeam + '&api_key=B1F06nTfUTYMBISSZxr268GfnDFn0UK7&limit=10"'
+
+    console.log(queryURL);
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then(function(response) {
+        console.log(response);
+        var results = response.data;
+
+        for (var i = 0; i < results.length; i++) {
+
+            var gifDiv = $('<div>')
+
+            var titleURL = response.data[i].title;
+            var p = $('<p id="title">').text('Title: ' + titleURL)
+
+            var ratingURL = response.data[i].rating;
+            var q = $('<p id="rating">').text('Rating: ' + ratingURL)        
+
+            var gifURL = response.data[i].bitly_url;
+            var gifImage = $('<img>');
+            gifImage.attr('src', gifURL)
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(q);
+            gifDiv.prepend(gifImage);
+            $('#gifsHere').prepend(gifDiv);
+        }
+
+    })
+
+
+
+})
+
+// After I click on 'Enter', I can't click on the buttons on the right
+// I am getting that Cross Orgin Read Blocking error again.
