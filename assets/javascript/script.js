@@ -41,7 +41,7 @@ $('.team').on('click', function(){
     currTeam = currTeam.replace(/\s/g, '+');
     console.log(currTeam);
 
-    if ($('.form-check-input').checked) {
+    if ($('#check').checked = true) {
     }else {
     $('#gifsHere').html('');
     }
