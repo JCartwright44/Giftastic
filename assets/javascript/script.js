@@ -19,7 +19,7 @@ showButtons();
 function addTeam() {
 $('#add-team').on('click', function(event) {
     console.log("click")
-// event.preventDefault();
+event.preventDefault();
 var class1 = 'team';
 var team = $('#team-input').val();
 console.log(team)
@@ -35,16 +35,16 @@ addTeam();
 
 function teamClick(){
 $('.team').on('click', function(){
-    // event.preventDefault();
+    event.preventDefault();
     console.log('click');
     var currTeam = $(this).attr('data-name').trim();
     currTeam = currTeam.replace(/\s/g, '+');
     console.log(currTeam);
 
-    // if ($('.form-check-input').checked) {
-    // }else {
+    if ($('.form-check-input').checked) {
+    }else {
     $('#gifsHere').html('');
-    // }
+    }
 
     var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + currTeam + '&api_key=B1F06nTfUTYMBISSZxr268GfnDFn0UK7&limit=12"'
 
