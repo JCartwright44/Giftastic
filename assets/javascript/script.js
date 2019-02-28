@@ -115,3 +115,8 @@ $('.team').on('click', function(){
 teamClick();
 
 // After I click on 'Enter', I can't click on the buttons on the right
+
+
+
+var queryURL1 = 'https://api.openbrewerydb.org/breweries?by_name=device&per_page=10';
+console.log(queryURL1);
